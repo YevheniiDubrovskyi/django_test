@@ -6,7 +6,7 @@ def app(environ, start_response):
 	status = '200 OK'
 	response_headers = [
 		('Content-type','text/plain'),
-		('COntent-length', str(len(data)))
+		('Content-length', str(len(data)))
 	]
 	start_response(status, response_headrs)
 	return iter([data])
