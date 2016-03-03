@@ -1,5 +1,5 @@
 def app(environ, start_response)
-	data = ''
+	data = QUERY_STRING.split('&').join('\n')
 	status = '200 OK'
 	response_headers = [
 		('Content-type','text/plain'),
