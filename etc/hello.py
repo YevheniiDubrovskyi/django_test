@@ -1,4 +1,4 @@
-def app(environ, start_response)
+def app(environ, start_response):
 	data = QUERY_STRING.split('&').join('\n')
 	status = '200 OK'
 	response_headers = [
