@@ -1,3 +1,5 @@
+#sudo gunicorn -c /etc/gunicorn.d/hello.py hello:app
+
 bind = '0.0.0.0:8080'
 pythonpath = '/home/box/web'
 working_dir = '/home/box/web'
