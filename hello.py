@@ -6,7 +6,7 @@ working_dir = '/home/box/web'
 python = '/usr/bin/pyhton'
 
 def app(environ, start_response):
-	data = '\r\n'.join(environ['QUERY_STRING'].split('&')
+	data = '\r\n'.join(environ['QUERY_STRING'].split('&'))
 	status = '200 OK'
 	response_headers = [
 		('Content-type','text/plain'),
