@@ -1,0 +1,19 @@
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install nginx -y
+sudo curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | sudo python -
+sudo curl https://bootstrap.pypa.io/get-pip.py | sudo python -
+sudo export PATH="/usr/local/bin:$PATH"
+vim /home/box/.bashrc [write to file => export PATH="/usr/local/bin:$PATH"]
+sudo pip install virtualenv
+mkdir web
+cd wev
+virtualenv web_venv
+source web_venv/bin/activate
+pip install gunicorn
+git init
+git pull https://github.com/DubrovskiyEvgeniy/stepic.org.git
+sudo ./init.sh
+gunicorn -b 0.0.0.0:8080 hello:app [test application]
+pip install django
+cd ask
+gunicorn -b 0.0.0.0:8000 ask.wsgi:application
