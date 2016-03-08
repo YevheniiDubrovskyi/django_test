@@ -2,7 +2,6 @@ sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install nginx -y
 sudo curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | sudo python -
 sudo curl https://bootstrap.pypa.io/get-pip.py | sudo python -
-sudo export PATH="/usr/local/bin:$PATH"
 vim /home/box/.bashrc [write to file => export PATH="/usr/local/bin:$PATH"]
 sudo pip install virtualenv
 mkdir web
