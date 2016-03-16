@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 
 DATABASES = {
     'default': {
-	'ENGINE': 'django.db.backends.mysql', 
-	'NAME': 'ask',
-	'USER': 'box',
-	'PASSWORD': '1997',
-	'HOST': '127.0.0.1',
-	'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ask',
+        'USER': 'dubrovskiy',
+        'PASSWORD': '1997',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -126,6 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 try:
-	from ask.local_settings import *
+    from ask.local_settings import *
 except ImportError:
-	pass
+    pass
