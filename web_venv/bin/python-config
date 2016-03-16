@@ -1,4 +1,4 @@
-#!/home/box/web/web_venv/bin/python
+#!/home/dubrovskiy/web/web_venv/bin/python
 
 import sys
 import getopt
