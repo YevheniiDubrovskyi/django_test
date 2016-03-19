@@ -57,8 +57,8 @@ def popular_questions(request):
 
 @require_GET
 def full_question(request, id):
-    qt = get_object_or_404(Question, id=id)
+    question = get_object_or_404(Question, id=id)
     return render(request, 'question.html', {
-        'question': qt,
-        'answers': Answer.objects.filter(question_id=qt.id),
+        'question': question,
+        'answers': Answer.objects.filter(question_id=question.id),
     })
