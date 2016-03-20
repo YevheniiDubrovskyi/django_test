@@ -32,7 +32,7 @@ def test(request, *args, **kwards):
 @require_GET
 def new_questions(request):
     try:
-        questions = Question.objects.order_by('-id')
+        questions = Question.objects.main()
     except Question.DoesNotExist:
         raise Http404
     page = paginate(request, questions, '/?page=')
@@ -45,7 +45,7 @@ def new_questions(request):
 @require_GET
 def popular_questions(request):
     try:
-        questions = Question.objects.order_by('-rating')
+        questions = Question.objects.popular()
     except Question.DoesNotExist:
         raise Http404
     page = paginate(request, questions, '/popular/?page=')
@@ -60,5 +60,5 @@ def full_question(request, id):
     question = get_object_or_404(Question, id=id)
     return render(request, 'question.html', {
         'question': question,
-        'answers': Answer.objects.filter(question_id=question.id),
+        'ansewrs': question.objects.get_answers(),
     })
