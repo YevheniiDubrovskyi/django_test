@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block title %}New questions{% endblock %}
 {% block content %}
-  {% for qt in questions %}
-  <h2>{{ qt }}</h2>
-  <a href="/question/{{ qt.id }}/">{{ qt }}</a>
+  {% for question in questions %}
+  <h2>{{ question }}</h2>
+  <!-- <a href="/question/{{ question.id }}/">{{ question }}</a> -->
+  <a href="{% url 'question' questiond.id %}">{{ question }}</a>
   {% endfor %}
 {% endblock %}
