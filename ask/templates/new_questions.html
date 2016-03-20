@@ -4,6 +4,6 @@
   {% for question in questions %}
   <h2>{{ question }}</h2>
   <!-- <a href="/question/{{ question.id }}/">{{ question }}</a> -->
-  <a href="{% url 'question' questiond.id %}">{{ question }}</a>
+  <a href="{% url 'question' question.id %}">{{ question }}</a>
   {% endfor %}
 {% endblock %}
