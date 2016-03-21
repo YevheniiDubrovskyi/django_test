@@ -15,4 +15,7 @@ sudo ./init.sh
 gunicorn -b 0.0.0.0:8080 hello:app [test application]
 pip install django
 cd ask
+[./manage.py makemigrations
+             migrate
+             collectstatic]
 gunicorn -b 0.0.0.0:8000 ask.wsgi:application
