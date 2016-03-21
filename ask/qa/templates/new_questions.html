@@ -1,5 +1,10 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
 {% block title %}New questions{% endblock %}
+{% block extrahead %}
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock %}
 {% block content %}
   {% for question in questions %}
   <h2>{{ question }}</h2>
