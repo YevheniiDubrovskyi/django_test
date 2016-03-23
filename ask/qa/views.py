@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from models import *
+from forms import *
 
 def paginate(request, qs, baseurl):
     try:
@@ -60,5 +61,31 @@ def full_question(request, id):
     question = get_object_or_404(Question, id=id)
     return render(request, 'question.html', {
         'question': question,
-        'ansewrs': question.objects.get_answers(),
+        'ansewrs': Answer.objects.get_answers(question.id),
+    })
+
+def add_ask(request):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            ask = form.save()
+            url = ask.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'add_ask.html', {
+        'form': form,
+    })
+
+def add_answer(request):
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            url = answer.get_question_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm()
+    return render(request, 'add_answer.html', {
+        'form': form,
     })

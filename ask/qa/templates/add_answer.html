@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post" action="{% url 'answer' %}">
+  <fieldset>
+    <ul>
+    {% for field in form %}
+      <li>
+        <label>{{ field.label }}</label>{{ field }}
+      </li>
+    {% endfor %}
+    </ul>
+  </fieldset>
+  <button type="submit">Send</button>
+</form>
+{% endblock %}
