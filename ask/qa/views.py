@@ -61,7 +61,7 @@ def full_question(request, id):
     question = get_object_or_404(Question, id=id)
     return render(request, 'question.html', {
         'question': question,
-        'ansewrs': Answer.objects.get_answers(question.id),
+        'answers': Answer.objects.get_answers(question.id),
     })
 
 def add_ask(request):
