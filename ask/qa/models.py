@@ -27,7 +27,7 @@ class Question(models.Model):
 
 class AnswerManager(models.Manager):
     def get_answers(self, id):
-        return self.filter(question=id)
+        return self.filter(question_id=id)
 
 class Answer(models.Model):
     text = models.TextField()
