@@ -2,12 +2,7 @@
   {% csrf_token %}
   <fieldset>
     <ul>
-    {% for field in form %}
-      <li>
-        <label>{{ field.label }}</label>
-        {{ field }}
-      </li>
-    {% endfor %}
+      {{ form.as_ul }}
     </ul>
   </fieldset>
   <button type="submit">Send</button>
