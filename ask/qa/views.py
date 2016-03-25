@@ -59,9 +59,11 @@ def popular_questions(request):
 @require_GET
 def full_question(request, id):
     question = get_object_or_404(Question, id=id)
+    form = AnswerForm(initial={'question': question.id})
     return render(request, 'question.html', {
         'question': question,
         'answers': Answer.objects.get_answers(question.id),
+        'form': form,
     })
 
 def add_ask(request):

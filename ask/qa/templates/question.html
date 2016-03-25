@@ -4,6 +4,7 @@
 {% block content %}
   <h2>{{ question }}</h2>
   <p>{{ question.text }}</p>
+  {% include "add_answer.html" %}
   {% for answer in answers %}
     <h3>{{ answer }}</h3>
   {% endfor %}
