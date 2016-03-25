@@ -84,10 +84,7 @@ def add_answer(request):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save()
-            url = answer.get_question_url()
-            return HttpResponseRedirect(url)
+        url = answer.get_question_url()
+        return HttpResponseRedirect(url)
     else:
-        form = AnswerForm()
-    return render(request, 'add_answer.html', {
-        'form': form,
-    })
+        return HttpResponseRedirect('/')
