@@ -87,4 +87,4 @@ def add_answer(request):
         url = answer.get_question_url()
         return HttpResponseRedirect(url)
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(reverse('base'))
