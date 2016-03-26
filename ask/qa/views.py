@@ -39,8 +39,7 @@ def new_questions(request):
         raise Http404
     page = paginate(request, questions, '/?page=')
     return render(request, 'new_questions.html', {
-        'questions': page.object_list,
-        'paginator': page.paginator,
+        'questions': page.object_list,,
         'page': page,
     })
 
@@ -53,7 +52,6 @@ def popular_questions(request):
     page = paginate(request, questions, '/popular/?page=')
     return render(request, 'popular_questions.html', {
         'questions': page.object_list,
-        'paginator': page.paginator,
         'page': page,
     })
 
