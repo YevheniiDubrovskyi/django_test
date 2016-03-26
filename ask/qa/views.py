@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
-from models import *
-from forms import *
+from django.core.urlresolvers import reverse
+from models import Question, Answer
+from forms import AskForm, AnswerForm
 
 def paginate(request, qs, baseurl):
     try:
