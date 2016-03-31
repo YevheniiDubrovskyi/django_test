@@ -1,5 +1,5 @@
 from django import forms
-from models import *
+from models import Question, Answer
 
 class AskForm(forms.Form):
     title = forms.CharField(max_length=255)
@@ -24,3 +24,12 @@ class AnswerForm(forms.Form):
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer
+
+class SignupForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=100)
+    password = forms.CharField(max_length=100)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    password = forms.CharField(max_length=100)

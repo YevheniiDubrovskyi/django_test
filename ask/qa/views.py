@@ -28,7 +28,7 @@ def paginate(request, qs, baseurl):
 
     return page
 
-def test(request, *args, **kwards):
+def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 @require_GET
@@ -39,7 +39,7 @@ def new_questions(request):
         raise Http404
     page = paginate(request, questions, '/?page=')
     return render(request, 'new_questions.html', {
-        'questions': page.object_list,,
+        'questions': page.object_list,
         'page': page,
     })
 
@@ -87,3 +87,9 @@ def add_answer(request):
         return HttpResponseRedirect(url)
     else:
         return HttpResponseRedirect(reverse('base'))
+
+def signup(request):
+    return HttpResponse('OK')
+
+def login(request):
+    return HttpResponse('OK')
