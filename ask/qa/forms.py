@@ -30,6 +30,14 @@ class SignupForm(forms.Form):
     email = forms.EmailField(max_length=100)
     password = forms.CharField(max_length=100)
 
+    def clean(self):
+        return self.cleaned_data
+
+    def save(self):
+        user = User(**self.cleaned_data)
+        user.save()
+        return answer
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30)
     password = forms.CharField(max_length=100)
