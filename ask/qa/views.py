@@ -78,12 +78,14 @@ def add_answer(request):
     else:
         return HttpResponseRedirect(reverse('base'))
 
-def signup(request):
+def signup_view(request):
     error = ''
     if request.method == 'POST':
         user = SignupForm(request.POST)
         if user.is_valid():
-            user.save()
+            user = user.clean()
+            user = User.objects.create_user(user['username'], user['email'], user['password'])
+            user = authenticate(username = user.username, password = user.password)
             login(request, user)
             return HttpResponseRedirect(reverse('base'))
         else:
@@ -95,7 +97,7 @@ def signup(request):
         'error': error,
     })
 
-def login(request):
+def login_view(request):
     error = ''
     if request.method == 'POST':
         username = request.POST.get('username')
