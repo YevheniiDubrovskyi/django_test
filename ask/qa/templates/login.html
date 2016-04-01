@@ -1,0 +1,12 @@
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <fieldset>
+    <ul>
+      {{ form.as_ul }}
+    </ul>
+  </fieldset>
+  {% if error %}
+  <h2>{{ error }}</h2>
+  {% endif %}
+  <button type="submit">Send</button>
+</form>

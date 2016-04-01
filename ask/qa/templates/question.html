@@ -2,10 +2,10 @@
 
 {% block title %}Question{% endblock %}
 {% block content %}
-  <h2>{{ question }}</h2>
+  <h2>{{ question }}</h2><h5>{{ question.author }}</h5>
   <p>{{ question.text }}</p>
   {% include "add_answer.html" %}
   {% for answer in answers %}
-    <h3>{{ answer }}</h3>
+    <h3>{{ answer }}</h3><h5>{{ answer.author }}</h5>
   {% endfor %}
 {% endblock %}
