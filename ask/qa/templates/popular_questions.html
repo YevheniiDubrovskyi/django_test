@@ -4,9 +4,9 @@
 
 {% block content %}
   {% for question in questions %}
-  <h2>{{ question }}</h2>
-  <!-- <a href="/question/{{ question.id }}/">{{ question }}</a> -->
-  <a href="{% url 'question' question.id %}">{{ question }}</a>
+  <h2>{{ question.title }}</h2>
+  <!-- <a href="/question/{{ question.id }}/">{{ question.title }}</a> -->
+  <a href="{% url 'question' question.id %}">{{ question.title }}</a>
   {% endfor %}
   <ul>
     {% if page.has_previous %}

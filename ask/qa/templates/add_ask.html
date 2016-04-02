@@ -6,9 +6,7 @@
   <form method="post" action="{% url 'ask' %}">
   {% csrf_token %}
     <fieldset>
-      <ul>
-      {{ form.as_ul }}
-      </ul>
+    {{ form.as_p }}
     </fieldset>
     <button type="submit">Send</button>
   </form>

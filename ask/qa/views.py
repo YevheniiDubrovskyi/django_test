@@ -1,11 +1,13 @@
 #coding: utf8
 
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.http import HttpResponse, HttpResponseRedirect
+from django.http.request import QueryDict
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from models import paginate, Question, Answer
 from forms import AskForm, AnswerForm, SignupForm, LoginForm
@@ -40,7 +42,7 @@ def popular_questions(request):
 @require_GET
 def full_question(request, id):
     question = get_object_or_404(Question, id=id)
-    form = AnswerForm(initial = {'question_id': question.id})
+    form = AnswerForm(initial={'question': id, 'author': request.user.id})
     return render(request, 'question.html', {
         'question': question,
         'answers': Answer.objects.get_answers(question.id),
@@ -50,8 +52,9 @@ def full_question(request, id):
 def add_ask(request):
     if request.method == 'POST':
         if request.user.is_authenticated():
-            form = AskForm(request.POST)
-            form._user = request.user
+            query = QueryDict(request.POST.urlencode(), mutable=True)
+            query.__setitem__('author', str(request.user.id))
+            form = AskForm(query)
             if form.is_valid():
                 ask = form.save()
                 url = ask.get_url()
@@ -64,28 +67,26 @@ def add_ask(request):
         'form': form,
     })
 
+@require_POST
+@login_required
 def add_answer(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated():
-            form = AnswerForm(request.POST)
-            form._user = request.user
-            if form.is_valid():
-                answer = form.save()
-            url = answer.get_question_url()
-            return HttpResponseRedirect(url)
-        else:
-            return HttpResponseRedirect(reverse('login'))
-    else:
-        return HttpResponseRedirect(reverse('base'))
+    query = QueryDict(request.POST.urlencode(), mutable=True)
+    query.__setitem__('author', str(request.user.id))
+    form = AnswerForm(query)
+    if form.is_valid():
+        answer = form.save()
+        url = answer.get_question_url()
+        return HttpResponseRedirect(url)
 
 def signup_view(request):
     error = ''
     if request.method == 'POST':
         user = SignupForm(request.POST)
         if user.is_valid():
-            user = user.clean()
-            user = User.objects.create_user(user['username'], user['email'], user['password'])
-            user = authenticate(username = user.username, password = user.password)
+            user = user.save()
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
             login(request, user)
             return HttpResponseRedirect(reverse('base'))
         else:
@@ -102,7 +103,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username = username, password = password)
+        user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse('base'))
